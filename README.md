@@ -1,7 +1,7 @@
 # relevannsi_sqlite_compatibility
 Relevannsi search plugin compatibility with Wordpress on SQLite. Relevannsi is a popular, powerful Wordpress plugin. The SQL contained in the plugin is intended to run on MySQL or similar database, and uses some features not available on SQLite.
 
-##Summary
+## Summary
 1. Given that you have Wordpress running on SQLite, and want to use the Relevannsi plugin for search...
 2. Add the code in filters.php to your theme's functions.php file. 
 3. Install the Relevannsi plugin. The tables will fail to create due to incompatibilities with the SQL the plugin usues to initialize itself.
@@ -11,19 +11,19 @@ Relevannsi search plugin compatibility with Wordpress on SQLite. Relevannsi is a
 
 
 
-##SQLite Conversion for Relevanssi Plugin
-###Overview
+## SQLite Conversion for Relevanssi Plugin
+### Overview
 This project contains SQL scripts that convert the default MySQL queries for the Relevanssi plugin into SQLite-compatible queries. Relevanssi is a powerful search plugin for WordPress, but it was initially designed to work with MySQL databases. In this conversion, we’ve adapted the SQL commands for compatibility with SQLite, which is being used as the database for this WordPress setup.
 The following instructions will guide you on how to run the scripts to set up your SQLite database and ensure compatibility with Relevanssi’s table structures and indexing requirements.
 
-###Prerequisites
+### Prerequisites
 SQLite Database: You must have an SQLite database set up for your WordPress site. If you're using WordPress Studio with SQLite, ensure that the SQLite integration is properly configured.
 SQLite Client: You’ll need an SQLite client to run these SQL scripts. Some popular tools include:
 DB Browser for SQLite
 Command-line tool sqlite3
 Relevanssi Plugin: Make sure that the Relevanssi plugin is installed and activated in your WordPress installation.
 
-###Running the Scripts
+### Running the Scripts
 1. Backup Your Database
 Before applying these changes, it is highly recommended to backup your SQLite database. This ensures that you can restore your original database if anything goes wrong.
 2. Open Your SQLite Database
@@ -41,8 +41,8 @@ Copy code
 sqlite3 database.sqlite < relevanssi_conversion.sql
 
 
-###Explanation of Queries
-####Table Creation
+### Explanation of Queries
+#### Table Creation
 The following queries create the necessary tables for Relevanssi in the SQLite database:
 wp_relevanssi
 This table holds the indexed search terms and associated data.
@@ -97,7 +97,7 @@ CREATE TABLE wp_relevanssi_log (
 );
 
 
-####Index Creation
+#### Index Creation
 The following index queries improve the speed of searching and querying the data:
 Index on wp_relevanssi by term
 This index speeds up searches based on the term column.
@@ -127,7 +127,7 @@ CREATE INDEX query ON wp_relevanssi_log (query)
 
 
 
-####Notes
+### Notes
 MySQL-Specific Syntax Adjustments:
 The original MySQL queries contained data type specifications like bigint(20), varchar(50), and mediumint(9), which were replaced with SQLite-compatible types like INTEGER and TEXT.
 Character Set:
@@ -137,7 +137,7 @@ The AUTO_INCREMENT keyword in MySQL was replaced with INTEGER PRIMARY KEY AUTOIN
 Triggers for Updates:
 SQLite does not support ON UPDATE CURRENT_TIMESTAMP. If you need this functionality, you will have to manage it via a trigger or in your application code.
 
-####Troubleshooting
+### Troubleshooting
 If you encounter any errors while running these scripts, check the following:
 Ensure the table does not exist already:
 If the table wp_relevanssi or other Relevanssi tables already exist in your SQLite database, you'll need to drop the existing tables before running the new CREATE TABLE commands:
@@ -146,7 +146,7 @@ Copy code
 DROP TABLE IF EXISTS wp_relevanssi;
 
 
-####Database Integrity:
+### Database Integrity:
 Ensure that there are no conflicting column types or data issues in your SQLite database.
 
 ####Conclusion
