@@ -1,4 +1,4 @@
-# Relevannsi Sqlite Compatibility
+# Relevannsi SQLite Compatibility
 Relevannsi search plugin compatibility with Wordpress on SQLite. Relevannsi is a popular, powerful Wordpress plugin. The SQL contained in the plugin is intended to run on MySQL or similar database, and uses some features not available on SQLite.
 
 ## Summary
